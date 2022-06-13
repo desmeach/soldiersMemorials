@@ -31,6 +31,11 @@ class SoldierModel
         return $this->readSoldierBy("id", $id);
     }
 
+    public function readAllSoldierByMemorial($id)
+    {
+        return $this->readAllSoldiersBy("id_memorial", $id);
+    }
+
     public function readSoldierByName($name)
     {
         return $this->readSoldierBy(["surname", "name", "middle_name"], $name);
@@ -70,6 +75,13 @@ class SoldierModel
 
         $soldier["retire"] = new RetireModel($this->database);
         $soldier["retire"] = $soldier["retire"]->readRetireById($soldier["id_retire"]);
+
+        return $soldier;
+    }
+
+    private function readAllSoldiersBy($field, $value)
+    {
+        $soldier = R::findAll('soldiers', $field . ' = ?', [$value]);
 
         return $soldier;
     }
