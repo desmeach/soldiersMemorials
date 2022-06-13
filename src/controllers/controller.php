@@ -50,7 +50,7 @@ class Controller
         }
         else
         {
-            $soldier = $this->model->readSoldierByName([$_GET["surname"], $_GET["name"]]);
+            $soldier = $this->model->readSoldierByName([$_GET["surname"], $_GET["name"], $_GET["middle_name"]]);
         }
         include_once $_SERVER['DOCUMENT_ROOT'] . '/soldiers/src/views/header.php';
         include_once $_SERVER['DOCUMENT_ROOT'] . '/soldiers/src/views/soldier/soldier_data.php';
