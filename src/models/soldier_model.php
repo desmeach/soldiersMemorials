@@ -31,14 +31,24 @@ class SoldierModel
         return $this->readSoldierBy("id", $id);
     }
 
-    public function readSoldierBySurname($surname)
+    public function readSoldierByName($name)
     {
-        return $this->readSoldierBy("surname", $surname);
+        return $this->readSoldierBy(["surname", "name", "middle_name"], $name);
     }
 
-    private function readSoldierBy(string $field, $value)
+    private function readSoldierBy($field, $value)
     {
-        $soldier = R::findOne('soldiers', $field . ' = ?', [$value]);
+        if (gettype($field) == "array")
+        {
+            $fields = "";
+            foreach ($field as $col)
+            {
+                $col .= $col . " = ?";
+            }
+            $soldier = R::findOne('soldiers', $fields, $value);
+        }
+        else
+            $soldier = R::findOne('soldiers', $field . ' = ?', [$value]);
 
         $soldier["birthplace"] = new BirthplaceModel($this->database);
         $soldier["birthplace"] = $soldier["birthplace"]->readBirthplaceById($soldier["id_birthplace"]);
