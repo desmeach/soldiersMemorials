@@ -46,6 +46,7 @@ if (isset($_POST["submit"]))
     </script>
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <a class="navbar-brand" href="/soldiers/">Братская могила г.Волжского</a>
+        <a href="#" class="btn main-btn btn-lg text-uppercase mr-4">Мемориалы</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
