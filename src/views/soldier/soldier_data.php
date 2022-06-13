@@ -1,4 +1,4 @@
-    <div class="container col-md-8 mx-auto" id="soldier-container">
+<div class="container col-md-8 mx-auto" id="container">
         <img src="/soldiers/public/images/soldiers_photo/<? echo $soldier["photo"] ?>" width="250" height="400" id="soldier-photo">
         <h1 id="soldier-name"><? echo $soldier["surname"]." ".$soldier["name"]." ".$soldier["middle_name"] ?></h1>
         <table class="info-table">
@@ -40,4 +40,4 @@
             <?echo $soldier["award"]["award_name"]?></td>
           </tr>
         </table>
-    </div>
+</div>

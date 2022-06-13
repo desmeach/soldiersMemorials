@@ -31,14 +31,29 @@ class SoldierModel
         return $this->readSoldierBy("id", $id);
     }
 
-    public function readSoldierBySurname($surname)
+    public function readAllSoldierByMemorial($id)
     {
-        return $this->readSoldierBy("surname", $surname);
+        return $this->readAllSoldiersBy("id_memorial", $id);
     }
 
-    private function readSoldierBy(string $field, $value)
+    public function readSoldierByName($name)
     {
-        $soldier = R::findOne('soldiers', $field . ' = ?', [$value]);
+        return $this->readSoldierBy(["surname", "name", "middle_name"], $name);
+    }
+
+    private function readSoldierBy($field, $value)
+    {
+        if (gettype($field) == "array")
+        {
+            $fields = "";
+            foreach ($field as $col)
+            {
+                $col .= $col . " = ?";
+            }
+            $soldier = R::findOne('soldiers', $fields, $value);
+        }
+        else
+            $soldier = R::findOne('soldiers', $field . ' = ?', [$value]);
 
         $soldier["birthplace"] = new BirthplaceModel($this->database);
         $soldier["birthplace"] = $soldier["birthplace"]->readBirthplaceById($soldier["id_birthplace"]);
@@ -60,6 +75,13 @@ class SoldierModel
 
         $soldier["retire"] = new RetireModel($this->database);
         $soldier["retire"] = $soldier["retire"]->readRetireById($soldier["id_retire"]);
+
+        return $soldier;
+    }
+
+    private function readAllSoldiersBy($field, $value)
+    {
+        $soldier = R::findAll('soldiers', $field . ' = ?', [$value]);
 
         return $soldier;
     }

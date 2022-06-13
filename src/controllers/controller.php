@@ -21,27 +21,39 @@ class Controller
                 break;
             case 'delete':
                 break;
-            case 'add_photo':
-                break;
-            default:
+            case 'soldier':
                 $this->readSoldier();
                 break;
+            default:
+                $this->readMemorial();
+                break;
         }
+    }
+
+    public function readMemorial()
+    {
+        $this->model->openConnection();
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/soldiers/src/views/header.php';
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/soldiers/src/views/memorials/memorial.php';
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/soldiers/src/views/footer.php';
+
+        $this->model->closeConnection();
     }
 
     public function readSoldier()
     {
         $this->model->openConnection();
+
         if (isset($_GET["id"]))
         {
             $soldier = $this->model->readSoldierById((int) $_GET["id"]);
         }
         else
         {
-            $soldier = $this->model->readSoldierBySurname($_GET["surname"]);
+            $soldier = $this->model->readSoldierByName([$_GET["surname"], $_GET["name"]]);
         }
         include_once $_SERVER['DOCUMENT_ROOT'] . '/soldiers/src/views/header.php';
-        include_once $_SERVER['DOCUMENT_ROOT'] . '/soldiers/src/views/soldier.php';
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/soldiers/src/views/soldier/soldier_data.php';
         include_once $_SERVER['DOCUMENT_ROOT'] . '/soldiers/src/views/footer.php';
 
         $this->model->closeConnection();
