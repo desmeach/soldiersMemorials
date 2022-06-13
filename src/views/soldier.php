@@ -8,7 +8,7 @@
           </tr>
           <tr>
             <td width="30%">Место рождения: </td>
-            <td><?echo $soldier["birthplace"]["region"].", ".$soldier["birthplace"]["city"].", ".$soldier["birthplace"]["district"].", ".$soldier["village"]?></td>
+            <td><?echo $soldier["birthplace"]["region"].", ".$soldier["birthplace"]["city"].", ".$soldier["birthplace"]["district"].", ".$soldier["birthplace"]["village"]?></td>
           </tr>
           <tr>
             <td width="30%">Год призыва: </td>
