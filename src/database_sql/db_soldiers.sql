@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 13 2022 г., 15:46
+-- Время создания: Июн 13 2022 г., 17:24
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.1.33
 
@@ -60,7 +60,9 @@ CREATE TABLE `birthplace` (
 --
 
 INSERT INTO `birthplace` (`id`, `id_country`, `region`, `city`, `district`, `village`) VALUES
-(1, 1, 'Московская обл.', 'Химки', 'Октябрьская ж/д.', 'с. Барашки');
+(1, 1, 'Московская обл.', 'Химки', 'Октябрьская ж/д.', 'с. Барашки'),
+(2, 1, 'Ростовская обл.', '_', 'Чертковский р-н.', 'с. Сохрановка'),
+(3, 1, 'Орловская обл.', '_', 'Знаменский р-н.', 'с. Красниково');
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,29 @@ CREATE TABLE `enlistment` (
 --
 
 INSERT INTO `enlistment` (`id`, `year`, `month`, `day`, `id_country`, `region`, `city`, `district`) VALUES
-(1, '1939', '01', '14', 1, 'Московская обл.', 'Химки', 'Химкинский р-н.');
+(1, '1939', '01', '14', 1, 'Московская обл.', 'Химки', 'Химкинский р-н.'),
+(2, '1929', '11', '12', 1, '_', '_', '_'),
+(3, '1930', '12', '25', 1, 'Орловская обл.', '_', 'Знаменский р-н.');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `memorials`
+--
+
+CREATE TABLE `memorials` (
+  `id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `memorials`
+--
+
+INSERT INTO `memorials` (`id`, `name`, `photo`, `description`) VALUES
+(1, 'Братская могила г. Волжского', 'volzhsky_memorial.jpg', 'volzhsky_memorial_description.txt');
 
 -- --------------------------------------------------------
 
@@ -124,7 +148,9 @@ CREATE TABLE `military_unit` (
 --
 
 INSERT INTO `military_unit` (`id`, `type`, `unit_num`) VALUES
-(1, 'Истребительный авиационный полк', 437);
+(1, 'Истребительный авиационный полк', 437),
+(2, 'Истребительный авиационный полк', 237),
+(3, 'Истребительный авиационный полк', 731);
 
 -- --------------------------------------------------------
 
@@ -142,7 +168,9 @@ CREATE TABLE `rank` (
 --
 
 INSERT INTO `rank` (`id`, `rank_name`) VALUES
-(1, 'Лейтенант');
+(1, 'Лейтенант'),
+(2, 'Майор'),
+(3, 'Капитан');
 
 -- --------------------------------------------------------
 
@@ -162,7 +190,9 @@ CREATE TABLE `retire` (
 --
 
 INSERT INTO `retire` (`id`, `year`, `month`, `day`) VALUES
-(1, '1942', '08', '26');
+(1, '1942', '08', '26'),
+(2, '1942', '08', '25'),
+(3, '1942', '10', '30');
 
 -- --------------------------------------------------------
 
@@ -184,15 +214,18 @@ CREATE TABLE `soldiers` (
   `id_rank` int NOT NULL COMMENT 'id звания',
   `id_military_unit` int NOT NULL COMMENT 'id военной части',
   `id_enlistment` int NOT NULL COMMENT 'id года и места призыва',
-  `id_birthplace` int NOT NULL COMMENT 'id места рождения'
+  `id_birthplace` int NOT NULL COMMENT 'id места рождения',
+  `id_memorial` int NOT NULL COMMENT 'id мемориала'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Дамп данных таблицы `soldiers`
 --
 
-INSERT INTO `soldiers` (`id`, `photo`, `id_status`, `surname`, `name`, `middle_name`, `birth_year`, `birth_month`, `birth_day`, `id_retire`, `id_rank`, `id_military_unit`, `id_enlistment`, `id_birthplace`) VALUES
-(1, 'filippov_alexei.jpg', 1, 'Филиппов', 'Алексей', 'Иванович', '1921', '01', '16', 1, 1, 1, 1, 1);
+INSERT INTO `soldiers` (`id`, `photo`, `id_status`, `surname`, `name`, `middle_name`, `birth_year`, `birth_month`, `birth_day`, `id_retire`, `id_rank`, `id_military_unit`, `id_enlistment`, `id_birthplace`, `id_memorial`) VALUES
+(1, 'filippov_alexei.jpg', 1, 'Филиппов', 'Алексей', 'Иванович', '1921', '01', '16', 1, 1, 1, 1, 1, 1),
+(2, 'timchenko_nikolai_vasil\'evich.jpg', 1, 'Тимченко', 'Николай', 'Васильевич', '1907', '05', '_', 2, 2, 2, 2, 2, 1),
+(3, 'orlov_anatoliy_nikolaevich.jpg', 1, 'Орлов', 'Анатолий', 'Николаевич', '1908', '11', '19', 3, 3, 3, 3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -258,7 +291,13 @@ ALTER TABLE `country`
 --
 ALTER TABLE `enlistment`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fk_country_enlistment` (`id_country`);
+  ADD KEY `fk_country_enlistment` (`id_country`) USING BTREE;
+
+--
+-- Индексы таблицы `memorials`
+--
+ALTER TABLE `memorials`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `military_unit`
@@ -288,7 +327,8 @@ ALTER TABLE `soldiers`
   ADD KEY `soldiers_fk3` (`id_rank`),
   ADD KEY `soldiers_fk4` (`id_military_unit`),
   ADD KEY `soldiers_fk5` (`id_enlistment`),
-  ADD KEY `soldiers_fk6` (`id_birthplace`);
+  ADD KEY `soldiers_fk6` (`id_birthplace`),
+  ADD KEY `soldiers_fk7` (`id_memorial`);
 
 --
 -- Индексы таблицы `soldier_award`
@@ -317,7 +357,7 @@ ALTER TABLE `award`
 -- AUTO_INCREMENT для таблицы `birthplace`
 --
 ALTER TABLE `birthplace`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `country`
@@ -329,31 +369,37 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT для таблицы `enlistment`
 --
 ALTER TABLE `enlistment`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `memorials`
+--
+ALTER TABLE `memorials`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `military_unit`
 --
 ALTER TABLE `military_unit`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `rank`
 --
 ALTER TABLE `rank`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `retire`
 --
 ALTER TABLE `retire`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `soldiers`
 --
 ALTER TABLE `soldiers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `status`
@@ -386,7 +432,8 @@ ALTER TABLE `soldiers`
   ADD CONSTRAINT `soldiers_fk3` FOREIGN KEY (`id_rank`) REFERENCES `rank` (`id`),
   ADD CONSTRAINT `soldiers_fk4` FOREIGN KEY (`id_military_unit`) REFERENCES `military_unit` (`id`),
   ADD CONSTRAINT `soldiers_fk5` FOREIGN KEY (`id_enlistment`) REFERENCES `enlistment` (`id`),
-  ADD CONSTRAINT `soldiers_fk6` FOREIGN KEY (`id_birthplace`) REFERENCES `birthplace` (`id`);
+  ADD CONSTRAINT `soldiers_fk6` FOREIGN KEY (`id_birthplace`) REFERENCES `birthplace` (`id`),
+  ADD CONSTRAINT `soldiers_fk7` FOREIGN KEY (`id_memorial`) REFERENCES `memorials` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `soldier_award`
