@@ -50,7 +50,7 @@ body
     padding-bottom: 40px;
 }
 
-.main-btn{
+.main-btn, .pnt-btn{
     display: flex;
     height: 38px;
     justify-content: center;
@@ -59,7 +59,7 @@ body
     background-color: var(--color2);
 }
 
-.main-btn:hover{
+.main-btn:hover, .pnt-btn:hover{
     color: var(--color0);
     background-color: var(--color1);
 }
