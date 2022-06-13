@@ -15,11 +15,14 @@ if (isset($_POST["submit"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="<? $_SERVER["DOCUMENT_ROOT"] ?>/soldiers/public/styles/main.css?v1.0">
+    <link rel="stylesheet" href="/soldiers/public/styles/main.css">
     <title>Soldiers</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <a class="navbar-brand" href="#">Братская могила г.Волжского</a>
+        <!-- Кнопка Мемориалы -->
+        <a href="#" class="btn main-btn btn-lg text-uppercase mr-4">Мемориалы</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
