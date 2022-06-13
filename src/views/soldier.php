@@ -36,7 +36,7 @@
           </tr>
           <tr>
             <td width="30%">Награды: </td>
-            <td><img src="/soldiers/public/images/awards_photo/<? echo $soldier["award"]["photo"] ?>" height="40" id="<?echo str_replace('.png', '', $soldier["award"]["photo"])?>">
+            <td><a target="_blank" href="https://ru.wikipedia.org/wiki/<?echo str_replace(" ", "_", $soldier["award"]["award_name"])?>"><img title="<?echo $soldier["award"]["award_name"]?>" src="/soldiers/public/images/awards_photo/<? echo $soldier["award"]["photo"] ?>" height="40" id="<?echo str_replace('.png', '', $soldier["award"]["photo"])?>"></a>
             <?echo $soldier["award"]["award_name"]?></td>
           </tr>
         </table>
