@@ -45,12 +45,11 @@ class SoldierModel
     {
         if (gettype($field) == "array")
         {
-            $fields = "";
-            foreach ($field as $col)
+            foreach ($field as $key => $name)
             {
-                $col .= $col . " = ?";
+                $field[$key] = $name . " = ?";
             }
-            $soldier = R::findOne('soldiers', $fields, $value);
+            $soldier = R::findOne('soldiers', implode(" AND ", $field), $value);
         }
         else
             $soldier = R::findOne('soldiers', $field . ' = ?', [$value]);
