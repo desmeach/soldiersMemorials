@@ -1,11 +1,12 @@
 <?
 include_once $_SERVER["DOCUMENT_ROOT"] . "/soldiers/src/models/soldier_model.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "/soldiers/src/lib/database.php";
 
 if (isset($_POST["submit"]))
 {
   $name = $_POST["soldier-name-search"];
   $name = explode(" ", $name);
-  header("Location: /soldiers/src/views/soldier/soldier.php?surname=".$name[0]."&name=".$name[1]);
+  header("Location: /soldiers/src/views/soldier/soldier.php?surname=".$name[0]."&name=".$name[1]."&middle_name=".$name[2]);
 }
 ?>
 
@@ -15,21 +16,28 @@ if (isset($_POST["submit"]))
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="js/jquery/jquery-3.6.0.js"></script>
-    <script type="text/javascript" src="js/jquery/jquery-ui.js"></script>
-    <link rel="stylesheet" href="js/jquery/jquery-ui.min.css">
+    <script type="text/javascript" src="http://localhost/soldiers/js/jquery/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="http://localhost/soldiers/js/jquery/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://localhost/soldiers/js/jquery/jquery-ui.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="<? $_SERVER["DOCUMENT_ROOT"] ?>/soldiers/public/styles/main.css?v1.0">
     <title>Soldiers</title>
 </head>
 <body>
     <script>
-    <? $soldiers = [] ?>
-
     $(document).on("focus", "#soldier-name-search", function(e) {
         if ( !$(this).data("autocomplete") ) { 
             $(this).autocomplete({          
-                source: ,
+                source: [<? 
+                          $soldiers = new SoldierModel(new Database("db_soldiers"));
+                          $soldiers = $soldiers->readAllSoldierByMemorial(1);
+                          foreach ($soldiers as $soldier_info)
+                          {
+                            $dataString = "";
+                            $dataString .= $soldier_info["surname"] . " " . $soldier_info["name"] . " " . $soldier_info["middle_name"];
+                            echo "'". $dataString . "',";
+                          }
+                        ?>],
                 width: 200,
                 max: 10,  
             });
