@@ -47,7 +47,7 @@ if (isset($_POST["submit"]))
     </script>
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <div class="btn-group mr-4">
-          <button type="button" class="btn text-uppercase main-btn">Братская могила г.Волжского</button>
+          <button type="button" class="btn text-uppercase main-btn" onclick="location.href = '/soldiers/'">Братская могила г.Волжского</button>
           <button type="button" class="btn dropdown-toggle dropdown-toggle-split pnt-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
           <div class="dropdown-menu dropmenu">
             <a class="dropdown-item" href="/soldiers/">Братская могила г.Волжского</a>
