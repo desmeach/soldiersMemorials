@@ -10,11 +10,54 @@ body
     font-family: "Snell Roundhand", cursive, Arial, Helvetica, sans-serif;
 }
 
-#page-photo
+/*added photo appearance animation*/
+#soldier-photo
 {
     float: left;
     margin-right: 50px;
     width: 35%;
+    animation: appearSoldierAnim 2s ease 0s 1 normal forwards;
+}
+
+#memorial-photo{
+    float: left;
+    margin-right: 50px;
+    width: 35%;
+    animation: appearMemorialAnim 2s ease 0s 1 normal forwards;
+}
+
+/*photo appearance animation*/
+@keyframes appearSoldierAnim {
+    0% {
+        opacity: 0;
+        transform: translateX(-250px);
+    }
+    100% {
+        opacity: 1;
+		transform: translateX(0);
+    }
+}
+
+@keyframes appearMemorialAnim {
+    0% {
+        opacity: 0.1;
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+		transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+		transform: scale(1);
+    }
+}
+
+@keyframes appearTextAnim {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 :root{
@@ -34,10 +77,16 @@ body
     margin-right: 50px;
 }
 
+#info-text, #soldier-name, #memrl-descrip
+{
+    animation: appearTextAnim 4s ease 0s 1 normal forwards;
+}
+
 #info-title
 {
     width: 30%;
     font-weight: bold;
+    animation: appearTextAnim 4s ease 0s 1 normal forwards;
 }
 
 #info-table
