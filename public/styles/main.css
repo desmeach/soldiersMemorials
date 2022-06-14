@@ -3,23 +3,18 @@ body
     background-image: url("../images/res/background.jpg");
 }
 
-#soldier-photo
-{
-    float: left;
-    margin-right: 50px;
-}
-
-#memorial-photo
-{
-    float: left;
-    margin-right: 50px;
-}
-
 #container
 {
-    margin-top: 3%;
+    margin-top: 5%;
     margin-left: 5%;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Snell Roundhand", cursive, Arial, Helvetica, sans-serif;
+}
+
+#page-photo
+{
+    float: left;
+    margin-right: 50px;
+    width: 35%;
 }
 
 :root{
@@ -39,14 +34,20 @@ body
     margin-right: 50px;
 }
 
-.info-table
+#info-title
 {
-    font-weight: bolder;
+    width: 30%;
+    font-weight: bold;
+}
+
+#info-table
+{
+    font-size: 18px;
 }
 
 #soldier-name
 {
-    font-size: 32px;
+    font-size: 34px;
     padding-bottom: 40px;
 }
 

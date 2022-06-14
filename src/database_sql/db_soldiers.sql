@@ -1,9 +1,9 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 13 2022 г., 17:24
+-- Время создания: Июн 13 2022 г., 23:56
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.1.33
 
@@ -11,11 +11,15 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+DROP DATABASE IF EXISTS db_soldiers; 
+CREATE DATABASE db_soldiers;
+USE db_soldiers;
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- База данных: `db_soldiers`
@@ -31,7 +35,7 @@ CREATE TABLE `award` (
   `id` int NOT NULL,
   `photo` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Фото награды',
   `award_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Название'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `award`
@@ -53,7 +57,7 @@ CREATE TABLE `birthplace` (
   `city` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Город рождения',
   `district` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Район рождения',
   `village` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Село/посёлок'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `birthplace`
@@ -73,7 +77,7 @@ INSERT INTO `birthplace` (`id`, `id_country`, `region`, `city`, `district`, `vil
 CREATE TABLE `country` (
   `id` int NOT NULL,
   `country` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `country`
@@ -100,7 +104,7 @@ CREATE TABLE `enlistment` (
   `region` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Область призыва',
   `city` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Город призыва',
   `district` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Район призыва'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `enlistment`
@@ -122,7 +126,7 @@ CREATE TABLE `memorials` (
   `name` varchar(255) NOT NULL,
   `photo` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Дамп данных таблицы `memorials`
@@ -141,7 +145,7 @@ CREATE TABLE `military_unit` (
   `id` int NOT NULL,
   `type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Подразделение',
   `unit_num` int NOT NULL COMMENT 'Номер'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `military_unit`
@@ -161,7 +165,7 @@ INSERT INTO `military_unit` (`id`, `type`, `unit_num`) VALUES
 CREATE TABLE `rank` (
   `id` int NOT NULL,
   `rank_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Название звания'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `rank`
@@ -183,7 +187,7 @@ CREATE TABLE `retire` (
   `year` varchar(4) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Год выбытия',
   `month` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'Месяц выбытия',
   `day` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT 'День выбытия'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `retire`
@@ -216,7 +220,7 @@ CREATE TABLE `soldiers` (
   `id_enlistment` int NOT NULL COMMENT 'id года и места призыва',
   `id_birthplace` int NOT NULL COMMENT 'id места рождения',
   `id_memorial` int NOT NULL COMMENT 'id мемориала'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `soldiers`
@@ -236,7 +240,7 @@ INSERT INTO `soldiers` (`id`, `photo`, `id_status`, `surname`, `name`, `middle_n
 CREATE TABLE `soldier_award` (
   `id_soldier` int NOT NULL,
   `id_award` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `soldier_award`
@@ -254,7 +258,7 @@ INSERT INTO `soldier_award` (`id_soldier`, `id_award`) VALUES
 CREATE TABLE `status` (
   `id` int NOT NULL,
   `status` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Статус солдата'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `status`

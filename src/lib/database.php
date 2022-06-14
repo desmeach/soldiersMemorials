@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/soldiers/vendor/autoload.php';
 class_alias('\RedBeanPHP\R', '\R');
 class Database
 {
-    private $userName = 'root', $password = '', $host = 'localhost', $port = '', $name;
+    private $userName = 'root', $password = 'root', $host = 'localhost', $port = '3306', $name;
 
     /**
      * __construct
