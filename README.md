@@ -1,5 +1,5 @@
 # soldiersMemorials
 
 Instruction to download project:\
-=> clone repo by *git clone <repo link>*\
-=> do *composer install* in console
+=> clone repo by ___git clone <repo link>___\
+=> do ___composer install___ in console
