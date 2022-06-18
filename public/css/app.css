@@ -1,16 +1,22 @@
 body
 {
     background-image: url("../images/res/background.jpg");
+    background-size: cover;
 }
 
 #container
 {
-    margin-top: 5%;
+    margin-top: 2%;
     margin-left: 5%;
     font-family: "Snell Roundhand", cursive, Arial, Helvetica, sans-serif;
 }
 
-/*added photo appearance animation*/
+#award-redirect
+{
+    text-decoration: none;
+}
+
+/*adding photo appearance animation*/
 #soldier-photo
 {
     float: left;
