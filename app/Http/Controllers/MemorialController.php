@@ -2,45 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Exception;
 use App\Models\Soldier;
-use App\Models\Birthplace;
-use App\Models\Country;
-use App\Models\Enlistment;
+use Illuminate\Http\Request;
 
 class MemorialController extends Controller
-{
+{    
+    /**
+     * soldiersList
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function soldiersList(Request $request)
     {
         $fullName = $request->input('soldier-name-search');
         $fullName = \explode(' ', $fullName);
-        $surname = '';
-        $name = '';
-        $middleName = '';
-        switch (count($fullName))
+        $surname = $fullName[0] ?? '';
+        $name = $fullName[1] ?? '';
+        $middleName = $fullName[2] ?? '';
+        $soldiers = Soldier::where('surname', 'like', '%'.$surname.'%')->where('name', 'like', '%'.$name.'%')->where('middle_name', 'like', '%'.$middleName.'%')->get();
+        if (count($soldiers) > 0)
         {
-            case 3:
-                $surname = $fullName[0];
-                $name = $fullName[1];
-                $middleName = $fullName[2];
-                $soldiers = Soldier::where('surname', $surname)->where('name', $name)->where('middle_name', $middleName)->get();
-                break;
-            case 2:
-                $surname = $fullName[0];
-                $name = $fullName[1];
-                $soldiers = Soldier::where('surname', $surname)->where('name', $name)->get();
-                break;
-            case 1:
-                $surname = $fullName[0];
-                $soldiers = Soldier::where('surname', $surname)->get();
-                break;
+            return view('soldiersList', 
+                    compact(
+                        'soldiers'
+                    ));
         }
-        
-        return view('soldiersList', 
-                compact(
-                    'soldiers'
-                ));
-    }
+        else 
+        {
+            return $this->soldierNotFound();
+        }
+    }    
+    /**
+     * soldier
+     *
+     * @return void
+     */
     public function soldier()
     {
         if (isset($_GET['id']))
@@ -75,13 +73,23 @@ class MemorialController extends Controller
             }
             else
             {
-                return view('soldierNotFound');
+                return $this->soldierNotFound();
             }
         }
         catch(Exception $e)
         {
             print($e->getMessage());
         }
+    }
+    
+    /**
+     * soldierNotFound
+     *
+     * @return void
+     */
+    public function soldierNotFound()
+    {
+        return view('soldierNotFound');
     }
 }
 
