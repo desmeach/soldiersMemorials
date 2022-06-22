@@ -56,16 +56,27 @@
         @if (count($awards) > 0)
           <tr>
             <td id="info-title">Награды: </td>
-            @foreach ($awards as $award)
-              <td id="info-text">
-                <a target="_blank" href="https://ru.wikipedia.org/wiki/{{ str_replace(" ", "_", $award->name) }}" id="award-redirect">
-                  <img title="{{ $award->name }}" src="/images/awards_photo/{{ $award->photo }}" height="40" id="award-photo">
+            <td id="info-text">
+                <a target="_blank" href="https://ru.wikipedia.org/wiki/{{ str_replace(" ", "_", $awards[0]->name) }}" id="award-redirect">
+                  <img title="{{ $awards[0]->name }}" src="/images/awards_photo/{{ $awards[0]->photo }}" height="40" id="award-photo">
                 </a>
-                {{ $award->name }}
+                {{ $awards[0]->name }}
               </td>
-            @endforeach
           </tr>
+          @for ($i = 1; $i < count($awards); $i++)
+          <tr>
+              <td></td>
+              <td id="info-text">
+                <a target="_blank" href="https://ru.wikipedia.org/wiki/{{ str_replace(" ", "_", $awards[$i]->name) }}" id="award-redirect">
+                  <img title="{{ $awards[$i]->name }}" src="/images/awards_photo/{{ $awards[$i]->photo }}" height="40" id="award-photo">
+                </a>
+                {{ $awards[$i]->name }}
+              </td>
+          </tr>
+          @endfor
         @endif
         </table>
 </div>
 @endsection
+
+@extends('footer')

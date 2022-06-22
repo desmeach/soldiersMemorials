@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('memorial');
 });
 
-Route::get('/soldier', ['as' => 'soldier', 'uses' => 'MemorialController@index']);
-
+Route::get('/soldiersList', ['as' => 'soldiersList', 'uses' => 'MemorialController@soldiersList']);
+Route::get('/soldier', ['as' => 'soldier', 'uses' => 'MemorialController@soldier']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
