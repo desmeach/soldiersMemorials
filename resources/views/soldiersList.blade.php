@@ -1,11 +1,10 @@
-@extends('master', ['soldiersData' => ''])
+@extends('master')
 
 @section('title')
 Список найденных солдат
 @endsection
 
 @section('content')
-@if (count($soldiers) > 0)
     <table class="info-table" id="info-table">
     @foreach ($soldiers as $soldier)
         <tr>
@@ -14,10 +13,7 @@
             </td>
         </tr>
     @endforeach
-</table>
-@else
-    {{route('soldierNotFound')}}
-@endif
+    </table>
 @endsection
 
 @extends('footer')

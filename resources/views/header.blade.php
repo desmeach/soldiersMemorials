@@ -16,7 +16,7 @@
     <script>
     $(document).on("focus", "#soldier-name-search", function(e) {
         if ( !$(this).data("autocomplete") ) {
-            var data = <?= json_encode($soldiersData)?> 
+            var data = <?= json_encode($soldiersData)?>;
             $(this).autocomplete({          
                 source: data,
                 width: 200,
