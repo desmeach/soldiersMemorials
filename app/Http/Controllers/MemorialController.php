@@ -7,12 +7,12 @@ use App\Models\Soldier;
 use Illuminate\Http\Request;
 
 class MemorialController extends Controller
-{    
+{
     /**
      * soldiersList
      *
      * @param  mixed $request
-     * @return void
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|void
      */
     public function soldiersList(Request $request)
     {
@@ -21,23 +21,23 @@ class MemorialController extends Controller
         $surname = $fullName[0] ?? '';
         $name = $fullName[1] ?? '';
         $middleName = $fullName[2] ?? '';
-        $soldiers = Soldier::where('surname', 'like', '%'.$surname.'%')->where('name', 'like', '%'.$name.'%')->where('middle_name', 'like', '%'.$middleName.'%')->get();
+        $soldiers = Soldier::where('surname', 'like', $surname.'%')->where('name', 'like', $name.'%')->where('middle_name', 'like', $middleName.'%')->get();
         if (count($soldiers) > 0)
         {
-            return view('soldiersList', 
+            return view('soldiersList',
                     compact(
                         'soldiers'
                     ));
         }
-        else 
+        else
         {
             return $this->soldierNotFound();
         }
-    }    
+    }
     /**
      * soldier
      *
-     * @return void
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|void
      */
     public function soldier()
     {
@@ -59,13 +59,13 @@ class MemorialController extends Controller
                 $status = $soldier->status;
                 $awards = $soldier->awards;
 
-                return view('soldier', 
+                return view('soldier',
                 compact(
-                    'soldier', 
-                    'birthplace', 
-                    'enlistment', 
-                    'militaryUnit', 
-                    'rank', 
+                    'soldier',
+                    'birthplace',
+                    'enlistment',
+                    'militaryUnit',
+                    'rank',
                     'retire',
                     'status',
                     'awards'
@@ -81,11 +81,11 @@ class MemorialController extends Controller
             print($e->getMessage());
         }
     }
-    
+
     /**
      * soldierNotFound
      *
-     * @return void
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|void
      */
     public function soldierNotFound()
     {
