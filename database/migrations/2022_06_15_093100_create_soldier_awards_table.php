@@ -20,6 +20,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('soldier_id')->constrained();
             $table->foreignId('award_id')->constrained();
+            $table->string('doc_path', 50)->nullable()->default("default.jpg");
             $table->timestamps();
         });
     }

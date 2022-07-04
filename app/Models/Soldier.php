@@ -41,8 +41,8 @@ class Soldier extends Model
         return $this->hasOne(Status::class, 'id', 'status_id');
     }
 
-    public function awards()
+    public function soldierAwards()
     {
-        return $this->belongsToMany(Award::class, 'soldier_awards');
+        return $this->hasMany(SoldierAward::class, 'soldier_id');
     }
 }

@@ -23,7 +23,7 @@ return new class extends Migration
     {
         Schema::create('soldiers', function (Blueprint $table) {
             $table->id();
-            $table->string('photo', 30)->nullable();
+            $table->string('photo', 30)->nullable()->default("default.jpg");
             $table->string('surname', 30);
             $table->string('name', 30)->nullable();
             $table->string('middle_name', 30)->nullable();

@@ -10,4 +10,9 @@ class SoldierAward extends Model
     use HasFactory;
 
     protected $table = 'soldier_awards';
+
+    public function props()
+    {
+        return $this->hasOne(Award::class, 'id', 'award_id');
+    }
 }

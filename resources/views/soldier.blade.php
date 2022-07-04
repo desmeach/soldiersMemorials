@@ -54,29 +54,44 @@
           <td id="info-text">{{ $status->status }}</td>
         </tr>
         @if (count($awards) > 0)
+          @for ($i = 0; $i < count($awards); $i++)
           <tr>
-            <td id="info-title">Награды: </td>
-            <td id="info-text">
-                <a target="_blank" href="https://ru.wikipedia.org/wiki/{{ str_replace(" ", "_", $awards[0]->name) }}" id="award-redirect">
-                  <img title="{{ $awards[0]->name }}" src="/images/awards_photo/{{ $awards[0]->photo }}" height="40" id="award-photo">
-                </a>
-                {{ $awards[0]->name }}
-              </td>
-          </tr>
-          @for ($i = 1; $i < count($awards); $i++)
-          <tr>
-              <td></td>
+              @if ($i == 0)
+                <td id="info-title">Награды: </td>
+              @else
+                <td></td>
+              @endif
               <td id="info-text">
-                <a target="_blank" href="https://ru.wikipedia.org/wiki/{{ str_replace(" ", "_", $awards[$i]->name) }}" id="award-redirect">
-                  <img title="{{ $awards[$i]->name }}" src="/images/awards_photo/{{ $awards[$i]->photo }}" height="40" id="award-photo">
+                <a target="_blank" href="https://ru.wikipedia.org/wiki/"{{ str_replace(" ", "_", $awards[$i]->props->name) }}" id="award-redirect">
+                  <img title="{{ $awards[$i]->props->name }}" src="/images/awards_photo/{{ $awards[$i]->props->photo }}" height="40" id="award-photo">
                 </a>
-                {{ $awards[$i]->name }}
+                <!-- картинка для popup дока -->
+                <img src="/images/award_docs/{{$awards[$i]->doc_path}}" id="doc-pic{{$i+1}}"> 
+                <span id="pop-up-text{{$i+1}}" onclick='popupOpen("doc-pic{{$i+1}}")'>{{ $awards[$i]->props->name }}</span>
               </td>
           </tr>
           @endfor
         @endif
         </table>
+        <!-- popup блок -->
+        <div id="pop-up" class="pop-up-container">              
+            <span class="close">&times;</span>
+            <img class="pop-up-content" id="pop-up-doc">
+        </div>
 </div>
+<script type="text/javascript">
+  var popup = document.getElementById('pop-up');
+  var popupDoc = document.getElementById('pop-up-doc');
+  function popupOpen(imgId){
+      var img = document.getElementById(imgId);
+      popup.style.display = "block";
+      popupDoc.src = img.src;
+  }
+  var closeButton = document.getElementsByClassName("close")[0];
+  closeButton.onclick = function() {
+      popup.style.display = "none";
+  }
+</script>
 @endsection
 
 @extends('footer')
