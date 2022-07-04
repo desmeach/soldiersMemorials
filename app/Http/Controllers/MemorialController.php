@@ -57,7 +57,7 @@ class MemorialController extends Controller
                 $rank = $soldier->rank;
                 $retire = $soldier->retire;
                 $status = $soldier->status;
-                $awards = $soldier->awards;
+                $awards = $soldier->soldierAwards;
 
                 return view('soldier',
                 compact(
@@ -68,7 +68,7 @@ class MemorialController extends Controller
                     'rank',
                     'retire',
                     'status',
-                    'awards'
+                    'awards',
                 ));
             }
             else
