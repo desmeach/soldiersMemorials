@@ -7,9 +7,9 @@
 @section('content')
 <div class="container col-md-9 mx-auto" id="container">
         @if ($soldier->photo !== NULL)
-          <img src="/images/soldiers_photo/{{ $soldier->photo }}" id="soldier-photo">
+          <img src="/images/soldiers_photo/{{ $soldier->photo }}" id="soldier-photo" class="rounded img-fluid">
         @else
-          <img src="/images/soldiers_photo/default.jpg" id="soldier-photo">
+          <img src="/images/soldiers_photo/default.jpg" id="soldier-photo" class="rounded img-fluid">
         @endif
         <h1 id="soldier-name">{{ $soldier->surname." ".$soldier->name." ".$soldier->middle_name }}</h1>
         <table class="info-table" id="info-table">
