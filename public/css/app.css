@@ -133,13 +133,85 @@ body
 
 :root{
     --color0: #ffffff;
-    --color1: #8c3f20;
-    --color2: #6d90c9;
+    --color1: #932D30;
+    --color2: #52341A;
+    --color3: #E6E8E5;
+    --color4: #B76369;
 }
 
 body
 {
     background-image: url("../images/res/background.jpg");
+    min-width: 320px;
+}
+
+.home-btn
+{
+    color: var(--color3);
+    background-color: var(--color1);
+    transition: all 0.3s ease;
+}
+
+.home-btn:hover
+{
+    color: var(--color3);
+    background-color: var(--color4);
+}
+
+.srch-row
+{
+    border: 1px solid var(--color2);
+    border-radius: 30px;
+    background: var(--color1);
+    background: -moz-linear-gradient(left, var(--color1) 0%, var(--color2) 100%);
+    background: -webkit-linear-gradient(left, var(--color1) 0%, var(--color2) 100%);
+    background: linear-gradient(to right, var(--color1) 0%, var(--color2) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=var(--color1), endColorstr=var(--color2), GradientType=1);
+}
+
+.srch-sldr
+{
+    font-size: 34px;
+}
+
+.srch-row h5, .srch-sldr, .srch-row h2
+{
+    color: var(--color3);
+}
+
+.srch-title
+{
+    font-size: 34px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+#soldier-icon
+{
+    width: 250px;
+    height: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+#soldier-icon:hover
+{
+    animation: icon-anim 0.5s ease 0s 1 normal forwards;
+}
+
+@keyframes icon-anim
+{
+    0%{
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+    100%{
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);
+    }
 }
 
 #soldier-photo
@@ -176,13 +248,26 @@ body
     height: 38px;
     justify-content: center;
     align-items: center;
-    color: var(--color0);
-    background-color: var(--color2);
+    color: var(--color4);
+    background-color: var(--color3);
+    transition: all 0.3s ease;
 }
 
 .main-btn:hover, .pnt-btn:hover{
-    color: var(--color0);
-    background-color: var(--color1);
+    color: var(--color3);
+    background-color: var(--color4);
+}
+
+.srch-fild, .sbmt-srch{
+    margin-top: 16px;
+    color: var(--color4);
+    background-color: var(--color3);
+    transition: all 0.3s ease;
+}
+
+.sbmt-srch:hover{
+    color: var(--color3);
+    background-color: var(--color4);
 }
 
 .navbar{

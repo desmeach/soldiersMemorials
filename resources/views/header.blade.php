@@ -42,8 +42,8 @@
             <li class="nav-item dropdown">
                 <form class="form-inline" method='GET' action="{{route('soldiersList')}}">
                     {{ csrf_field() }}
-                    <input class="form-control mr-sm-2" type="search" placeholder="Введите ФИО солдата" aria-label="Search" name="soldier-name-search" id="soldier-name-search">
-                    <button class="btn btn-light my-2 my-sm-0" type="submit" name="submit">Найти</button>
+                    <input class="form-control mr-sm-2 srch-fild" type="search" placeholder="Введите ФИО солдата" aria-label="Search" name="soldier-name-search" id="soldier-name-search">
+                    <button class="btn sbmt-srch" type="submit" name="submit">Найти</button>
                 </form>
             </li>
           </ul>
