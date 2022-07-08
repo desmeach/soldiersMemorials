@@ -47,5 +47,5 @@
             });
         }
     });
-    document.getElementById("memorial-name").innerHTML = <?= isset($_GET["memorial"]) ? $_GET["memorial"] : "Братская могила г.Волжского" ?>;
+    document.getElementById("memorial-name").innerHTML = "<?= isset($_GET["memorial"]) ? $_GET["memorial"] : "Братская могила г.Волжского" ?>";
     </script>
