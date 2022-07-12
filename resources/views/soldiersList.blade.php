@@ -12,15 +12,15 @@
             </div>
         </div>
         @foreach ($soldiers as $soldier)
-        <div class="row row-cols-auto justify-content-md-center align-items-center mt-5 mx-auto srch-row">
-            <div class="col-lg-2 col-sm-12" id="snf-col">
+        <div class="row row-cols-auto justify-content-center align-items-center mt-5 mx-auto srch-row">
+            <div class="col-lg-2 col-sm-12 text-center" id="img-col">
                 @if ($soldier->photo !== NULL)
                     <img src="/images/soldiers_photo/{{ $soldier->photo }}" id="soldier-icon" class="rounded">
                 @else
                     <img src="/images/soldiers_photo/default.jpg" id="soldier-icon" class="rounded">
                 @endif
             </div>
-            <div class="col-md-auto">
+            <div class="col-auto" id="name-col">
                 <a class="srch-sldr" href="/soldier?id=<?=$soldier->id?>"><?=$soldier->surname." ".$soldier->name." ".$soldier->middle_name?></a>
                 <h5>Дата рождения: {{ $soldier->birth_day.".".$soldier->birth_month.".".$soldier->birth_year }}</h5>
             </div>
