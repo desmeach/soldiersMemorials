@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Soldier;
 use Illuminate\Http\Request;
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class MemorialController extends Controller
 {
@@ -14,6 +18,11 @@ class MemorialController extends Controller
      * @param  mixed $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|void
      */
+    public function downloadQR()
+    {
+        $filepath = public_path('/images/soldiers_qr/').$_GET["file"];
+        return Response::download($filepath);
+    }
     public function soldiersList(Request $request)
     {
         $fullName = $request->input('soldier-name-search');
@@ -49,7 +58,7 @@ class MemorialController extends Controller
             $soldier = NULL;
         try
         {
-            if ($soldier !== NULL)
+            if ($soldier)
             {
                 $birthplace = $soldier->birthplace;
                 $enlistment = $soldier->enlistment;
@@ -58,7 +67,22 @@ class MemorialController extends Controller
                 $retire = $soldier->retire;
                 $status = $soldier->status;
                 $awards = $soldier->soldierAwards;
-
+                if (!$soldier->qr_path)
+                {
+                    $fileName = $soldier->surname."_".$soldier->name."_".$soldier->middle_name."_qr.svg";
+                    DB::table('soldiers')->where('id', $soldier->id)->update(['qr_path' => $fileName]);
+                    if (!file_exists('/images/soldiers_qr/'.$fileName))
+                    {
+                        $options = new QROptions(
+                            [
+                              'eccLevel' => QRCode::ECC_L,
+                              'outputType' => QRCode::OUTPUT_MARKUP_SVG,
+                              'version' => 5,
+                            ]
+                        );
+                        $qrcode = (new QRCode($options))->render('http://localhost:8000/soldier?id='.$soldier->id, './images/soldiers_qr/'.$fileName);
+                    }
+                }
                 return view('soldier',
                 compact(
                     'soldier',

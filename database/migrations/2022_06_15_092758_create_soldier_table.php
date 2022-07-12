@@ -30,13 +30,14 @@ return new class extends Migration
             $table->string('birth_year', 4);
             $table->string('birth_month', 2)->nullable();
             $table->string('birth_day', 2)->nullable();
-            $table->foreignId('status_id')->constrained();
-            $table->foreignId('retire_id')->constrained();
-            $table->foreignId('rank_id')->constrained();
-            $table->foreignId('military_unit_id')->constrained();
-            $table->foreignId('enlistment_id')->constrained();
-            $table->foreignId('birthplace_id')->constrained();
+            $table->foreignId('status_id')->constrained()->nullable();
+            $table->foreignId('retire_id')->constrained()->nullable();
+            $table->foreignId('rank_id')->constrained()->nullable();
+            $table->foreignId('military_unit_id')->constrained()->nullable();
+            $table->foreignId('enlistment_id')->constrained()->nullable();
+            $table->foreignId('birthplace_id')->constrained()->nullable();
             $table->foreignId('memorial_id')->constrained();
+            $table->string('qr_path', 50)->nullable();
             $table->timestamps();
         });
     }
