@@ -67,21 +67,18 @@ class MemorialController extends Controller
                 $retire = $soldier->retire;
                 $status = $soldier->status;
                 $awards = $soldier->soldierAwards;
-                if (!$soldier->qr_path)
+                $fileName = $soldier->surname."_".$soldier->name."_".$soldier->middle_name."_qr.svg";
+                if (!$soldier->qr_path || !file_exists(public_path('/images/soldiers_qr/').$fileName))
                 {
-                    $fileName = $soldier->surname."_".$soldier->name."_".$soldier->middle_name."_qr.svg";
                     DB::table('soldiers')->where('id', $soldier->id)->update(['qr_path' => $fileName]);
-                    if (!file_exists('/images/soldiers_qr/'.$fileName))
-                    {
-                        $options = new QROptions(
+                    $options = new QROptions(
                             [
                               'eccLevel' => QRCode::ECC_L,
                               'outputType' => QRCode::OUTPUT_MARKUP_SVG,
                               'version' => 5,
                             ]
-                        );
-                        $qrcode = (new QRCode($options))->render('http://localhost:8000/soldier?id='.$soldier->id, './images/soldiers_qr/'.$fileName);
-                    }
+                            );
+                    $qrcode = (new QRCode($options))->render('http://localhost:8000/soldier?id='.$soldier->id, './images/soldiers_qr/'.$fileName);
                 }
                 return view('soldier',
                 compact(
