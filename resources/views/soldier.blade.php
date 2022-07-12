@@ -70,7 +70,7 @@
                 <img title="{{ $awards[$i]->props->name }}" src="/images/awards_photo/{{ $awards[$i]->props->photo }}" height="40" id="award-photo">
               </a>
               <!-- картинка для popup дока -->
-              <img src="/images/award_docs/{{$awards[$i]->doc_path}}" id="doc-pic{{$i+1}}"> 
+              <img src="/images/award_docs/{{ $awards[$i]->doc_path }}" id="doc-pic{{$i+1}}"> 
               <span id="pop-up-text{{$i+1}}" onclick='popupOpen("doc-pic{{$i+1}}")'>{{ $awards[$i]->props->name }}</span>
             </td>
         </tr>
@@ -83,6 +83,11 @@
         <img class="pop-up-content" id="pop-up-doc">
       </div>
     </div>
+  </div>
+  <div id="qr-img-container">
+    <img src="/images/soldiers_qr/<?=$soldier->qr_path?>" width="100" id="qr-img">
+    </br>
+    <a href="/download?file=<?=$soldier->qr_path?>">Скачать QR-код</a>
   </div>
 </div>
 <script type="text/javascript">
@@ -99,5 +104,3 @@
   }
 </script>
 @endsection
-
-@extends('footer')

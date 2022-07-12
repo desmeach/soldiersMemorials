@@ -201,7 +201,7 @@ body
     margin-bottom: 10px;
 }
 
-#info-text, #soldier-name, #memrl-descrip
+#info-text, #soldier-name, #memrl-descrip, #qr-img
 {
     animation: appearTextAnim 4s ease 0s 1 normal forwards;
 }
@@ -221,6 +221,11 @@ body
 #soldier-name
 {
     font-size: 34px;
+}
+
+#qr-img-container
+{
+    text-align: right;
 }
 
 .main-btn, .pnt-btn{

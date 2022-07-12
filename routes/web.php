@@ -24,6 +24,7 @@ Route::get('/soldierNotFound', function () {
 
 Route::get('/soldiersList', ['as' => 'soldiersList', 'uses' => 'MemorialController@soldiersList']);
 Route::get('/soldier', ['as' => 'soldier', 'uses' => 'MemorialController@soldier']);
+Route::get('/download', ['as' => 'downloadQR', 'uses' => 'MemorialController@downloadQR']);
 
 Auth::routes();
 

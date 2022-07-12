@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('region', 50)->nullable();
             $table->string('city', 50)->nullable();
             $table->string('distict', 50)->nullable();
-            $table->foreignId('country_id')->constrained();
+            $table->foreignId('country_id')->constrained()->nullable();
             $table->timestamps();
         });
     }
